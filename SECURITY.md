@@ -1,14 +1,13 @@
 # Reporting Security Issues
 
-The ESELDevelopment team and community take security bugs in ESELDevelopment seriously.
-We appreciate your efforts to responsibly disclose your findings, and will make every
-effort to acknowledge your contributions.
+If you discover a security issue, please tell us right away!
 
-To report a security issue, please use the GitHub Security Advisory
-["Report a Vulnerability"](https://github.com/ESELdevelopment/ecmanager/security/advisories/new) tab.
+## Reporting
 
-The ESELDevelopment team will send a response indicating the next steps in handling your report.
-After the initial reply to your report, the security team will keep you informed of the progress
-towards a fix and full announcement, and may ask for additional information or guidance.
+Please **DO NOT** file a public issue to report a security
+vulnerability, instead send your report privately to us
+([Marcel Herhold](mailto:herhold.marcel@gmail.com)).
 
-Report security bugs in third-party modules to the person or team maintaining the module.
+## Supported Versions
+
+We support all versions, wich are not marked as end-of-life.

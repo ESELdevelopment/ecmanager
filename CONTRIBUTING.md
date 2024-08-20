@@ -13,6 +13,10 @@ More details [here](./CODE_OF_CONDUCT.md).
 
 Issues are created [here](https://github.com/ESELdevelopment/ecmanager/issues/new).
 
+:warning: IF you discover a security issue, please read
+following [guide](./SECURITY.md). **DO NOT** create a public
+issue.
+
 ## Pull Requests
 
 tbd

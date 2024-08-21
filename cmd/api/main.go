@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	calc "ecmanager/internal/api"
+)
 
 func main() {
-	fmt.Println("Hello world!")
+	calc.Calculate()
 }

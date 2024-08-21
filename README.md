@@ -1,3 +1,7 @@
-# ecmanager
+# ECManager
 
-A tui to manager ecs service from AWS
+A terminal UI to manage your AWS ElasticContainerService-Clusters
+
+## Note
+
+> This tool is currently under development and therefore not released yet.

@@ -6,6 +6,8 @@ import (
 )
 
 func TestMain(t *testing.T) {
-	calc.Calculate()
-	//TODO Write Test Here
+	test := calc.Calculate()
+	if test != 2 {
+		t.Errorf("Result was incorrect")
+	}
 }

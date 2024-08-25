@@ -6,8 +6,8 @@ If you discover a security issue, please tell us right away!
 
 Please **DO NOT** file a public issue to report a security
 vulnerability, instead send your report privately to us
-([Marcel Herhold](mailto:herhold.marcel@gmail.com)).
+[Team ESEL](mailto:organization@esel.dev).
 
 ## Supported Versions
 
-We support all versions, wich are not marked as end-of-life.
+At the current state of development, we are only supporting the latest version, published under [Releases](https://github.com/ESELdevelopment/ecmanager/releases).

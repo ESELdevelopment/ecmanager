@@ -6,7 +6,7 @@ If you discover a security issue, please tell us right away!
 
 Please **DO NOT** file a public issue to report a security
 vulnerability, instead send your report privately to us
-[Team ESEL](mailto:organization@esel.dev).
+[Team ESEL](mailto:compliance@esel.dev).
 
 ## Supported Versions
 

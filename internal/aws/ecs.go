@@ -34,3 +34,7 @@ func (c *AwsClient) ListECSClusters(ctx context.Context) ([]string, error) {
 	}
 	return clusters, nil
 }
+
+func (c *AwsClient) TestMe() bool {
+	return c.ecsClient != nil
+}

@@ -2,7 +2,6 @@ package aws
 
 import (
 	"context"
-	"fmt"
 	"net/url"
 	"os"
 	"sync"
@@ -26,7 +25,6 @@ type resolverV2 struct {
 func (*resolverV2) ResolveEndpoint(ctx context.Context, params ecs.EndpointParameters) (
 	smithyendpoints.Endpoint, error) {
 	u := os.Getenv("AWS_ENDPOINT_URL")
-	fmt.Println(u)
 	if u != "" {
 		endpointUrl, err := url.Parse(u)
 		if err != nil {

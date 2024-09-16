@@ -1,27 +1,76 @@
 package aws_test
 
 import (
+	"context"
+	"ecmanager/internal/aws"
 	"fmt"
+	awsSdk "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/ecs"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	"github.com/aws/smithy-go/middleware"
+	"os"
 	"reflect"
 	"testing"
 	"unsafe"
-
-	"ecmanager/internal/aws"
-
-	"github.com/stretchr/testify/assert"
 )
 
-type MockEcsClient struct{}
+func TestECSService_DescribeClusters(t *testing.T) {
+	type args struct {
+		ctx                context.Context
+		withApiOptionsFunc func(stack *middleware.Stack) error
+	}
 
-func (m *MockEcsClient) ListClustersInput() string {
-	return "Hello"
-}
+	cases := []struct {
+		name    string
+		args    args
+		want    error
+		wantErr bool
+	}{
+		{
+			name: "Retrieve cluster information",
+			args: args{
+				ctx: context.Background(),
+				withApiOptionsFunc: func(stack *middleware.Stack) error {
+					return stack.Finalize.Add(
+						middleware.FinalizeMiddlewareFunc(
+							"DescribeClustersMock",
+							func(ctx context.Context, input middleware.FinalizeInput, handler middleware.FinalizeHandler) (middleware.FinalizeOutput, middleware.Metadata, error) {
+								return middleware.FinalizeOutput{
 
-func TestDescribeClustersInputTest(t *testing.T) {
-	client := &aws.AwsClient{}
-	setFieldValue(client, "ecsClient", MockEcsClient{})
-	result := client.TestMe()
-	assert.True(t, result)
+									Result: &ecs.DescribeClustersOutput{
+										Clusters:       []types.Cluster{{ClusterName: awsSdk.String(`clusterName`)}},
+										Failures:       nil,
+										ResultMetadata: middleware.Metadata{},
+									},
+								}, middleware.Metadata{}, nil
+							},
+						), middleware.Before)
+				}},
+			want:    nil,
+			wantErr: false,
+		},
+	}
+
+	for _, tt := range cases {
+		t.Run(tt.name, func(t *testing.T) {
+			os.Unsetenv("AWS_ACCESS_KEY_ID")
+			os.Unsetenv("AWS_SECRET_ACCESS_KEY")
+			cfg, err := config.LoadDefaultConfig(
+				tt.args.ctx,
+				config.WithRegion("eu-central-1"),
+				config.WithAPIOptions([]func(*middleware.Stack) error{tt.args.withApiOptionsFunc}))
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			client := ecs.NewFromConfig(cfg)
+			ecsService := aws.ECSServiceImpl{}
+			setFieldValue(&ecsService, "client", client)
+
+			_, err = ecsService.DescribeClusters("clusterName")
+		})
+	}
 }
 
 func setFieldValue(target any, fieldName string, value any) {

@@ -2,28 +2,24 @@ package main
 
 import (
 	"context"
+	"ecmanager/internal/aws"
 	"encoding/json"
 	"fmt"
 	"log"
-
-	"ecmanager/internal/aws"
 )
 
 func main() {
 	ctx := context.Background()
 
-	awsClient, err := aws.GetAwsClient(ctx)
+	ecsService := aws.GetEcsService(ctx)
 
-	if err != nil {
-		log.Fatalf("failed to retrieve ECS client, %v", err)
-	}
-	clusters, err := awsClient.ListECSClusters(ctx)
+	clusters, err := ecsService.ListClusters(ctx)
 	if err != nil {
 		log.Fatalf("failed to list ECS clusters, %v", err)
 	}
 
 	for _, cluster := range clusters {
-		detailsPointer, err := awsClient.DescribeECSCluster(ctx, cluster)
+		detailsPointer, err := ecsService.DescribeClusters(cluster)
 		if err != nil {
 			log.Fatalf("failed retrieve details for cluster, %v with error %v", cluster, err)
 		}

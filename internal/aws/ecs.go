@@ -2,25 +2,74 @@ package aws
 
 import (
 	"context"
-
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
-	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
+	"net/url"
+	"os"
+	"sync"
 )
 
-func (c *AwsClient) DescribeECSCluster(ctx context.Context, clusterName string) (*types.Cluster, error) {
+var (
+	once       = &sync.Once{}
+	ecsService *ECSServiceImpl
+)
+
+type ECSService interface {
+	DescribeClusters(clusterName string) (*ecs.DescribeClustersOutput, error)
+	ListClusters(ctx context.Context) ([]string, error)
+}
+
+// ECSServiceImpl Need to make it public to access it in tests
+type ECSServiceImpl struct {
+	client *ecs.Client
+}
+
+type resolverV2 struct {
+}
+
+func (*resolverV2) ResolveEndpoint(ctx context.Context, params ecs.EndpointParameters) (
+	smithyendpoints.Endpoint, error) {
+	u := os.Getenv("AWS_ENDPOINT_URL")
+	if u != "" {
+		endpointUrl, err := url.Parse(u)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, err
+		}
+		return smithyendpoints.Endpoint{
+			URI: *endpointUrl,
+		}, nil
+	}
+	return ecs.NewDefaultEndpointResolverV2().ResolveEndpoint(ctx, params)
+}
+
+func (e *ECSServiceImpl) DescribeClusters(clusterName string) (*ecs.DescribeClustersOutput, error) {
 	input := &ecs.DescribeClustersInput{
 		Clusters: []string{clusterName},
 	}
-	result, err := c.ecsClient.DescribeClusters(ctx, input)
 
-	return &result.Clusters[0], err
+	return e.client.DescribeClusters(context.Background(), input)
 }
 
-func (c *AwsClient) ListECSClusters(ctx context.Context) ([]string, error) {
+func GetEcsService(ctx context.Context) ECSService {
+	once.Do(func() {
+		cfg, err := config.LoadDefaultConfig(ctx)
+		if err != nil {
+			return
+		}
+		ecsClient := ecs.NewFromConfig(cfg, func(o *ecs.Options) {
+			o.EndpointResolverV2 = &resolverV2{}
+		})
+		ecsService = &ECSServiceImpl{client: ecsClient}
+	})
+	return ecsService
+}
+
+func (c *ECSServiceImpl) ListClusters(ctx context.Context) ([]string, error) {
 	var clusters []string
 	input := &ecs.ListClustersInput{}
 	for {
-		output, err := c.ecsClient.ListClusters(ctx, input)
+		output, err := c.client.ListClusters(ctx, input)
 		if err != nil {
 			return nil, err
 		}
@@ -33,8 +82,4 @@ func (c *AwsClient) ListECSClusters(ctx context.Context) ([]string, error) {
 		input.NextToken = output.NextToken
 	}
 	return clusters, nil
-}
-
-func (c *AwsClient) TestMe() bool {
-	return c.ecsClient != nil
 }

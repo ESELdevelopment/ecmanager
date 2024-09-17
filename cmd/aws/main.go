@@ -19,7 +19,7 @@ func main() {
 	}
 
 	for _, cluster := range clusters {
-		detailsPointer, err := ecsService.DescribeClusters(cluster)
+		detailsPointer, err := ecsService.DescribeClusters(ctx, cluster)
 		if err != nil {
 			log.Fatalf("failed retrieve details for cluster, %v with error %v", cluster, err)
 		}

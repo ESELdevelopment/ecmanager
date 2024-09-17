@@ -49,7 +49,7 @@ func GetEcsService(ctx context.Context) ECSService {
 }
 
 type ECSService interface {
-	DescribeClusters(clusterName string) (*ecs.DescribeClustersOutput, error)
+	DescribeClusters(ctx context.Context, clusterName string) (*ecs.DescribeClustersOutput, error)
 	ListClusters(ctx context.Context) ([]string, error)
 }
 
@@ -57,12 +57,12 @@ type ECSServiceImpl struct {
 	client *ecs.Client
 }
 
-func (e *ECSServiceImpl) DescribeClusters(clusterName string) (*ecs.DescribeClustersOutput, error) {
+func (e *ECSServiceImpl) DescribeClusters(ctx context.Context, clusterName string) (*ecs.DescribeClustersOutput, error) {
 	input := &ecs.DescribeClustersInput{
 		Clusters: []string{clusterName},
 	}
 
-	return e.client.DescribeClusters(context.Background(), input)
+	return e.client.DescribeClusters(ctx, input)
 }
 
 func (c *ECSServiceImpl) ListClusters(ctx context.Context) ([]string, error) {

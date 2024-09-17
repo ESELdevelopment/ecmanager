@@ -75,7 +75,7 @@ func TestECSService_DescribeClusters(t *testing.T) {
 			ecsService := aws.ECSServiceImpl{}
 			setFieldValue(&ecsService, "client", client)
 
-			response, e := ecsService.DescribeClusters("clusterName")
+			response, e := ecsService.DescribeClusters(tt.args.ctx, "clusterName")
 
 			if tt.wantErr {
 				assert.NotNilf(t, e, "DescribeClusters() error = %v, wantErr %v", e, tt.wantErr)

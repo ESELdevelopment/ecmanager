@@ -18,7 +18,9 @@ docker compose up -d
 After that you can start the ECManager with the following environment variables:
 
 ```bash
-AWS_ENDPOINT_URL=http://localhost:5000
+export AWS_ENDPOINT_URL=http://localhost:5000
+export AWS_ACCESS_KEY_ID=foo
+export AWS_SECRET_ACCESS_KEY=bar
 go run cmd/aws/main.go
 ```
 

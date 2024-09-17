@@ -15,16 +15,6 @@ var (
 	ecsService *ECSServiceImpl
 )
 
-type ECSService interface {
-	DescribeClusters(clusterName string) (*ecs.DescribeClustersOutput, error)
-	ListClusters(ctx context.Context) ([]string, error)
-}
-
-// ECSServiceImpl Need to make it public to access it in tests
-type ECSServiceImpl struct {
-	client *ecs.Client
-}
-
 type resolverV2 struct {
 }
 
@@ -43,14 +33,6 @@ func (*resolverV2) ResolveEndpoint(ctx context.Context, params ecs.EndpointParam
 	return ecs.NewDefaultEndpointResolverV2().ResolveEndpoint(ctx, params)
 }
 
-func (e *ECSServiceImpl) DescribeClusters(clusterName string) (*ecs.DescribeClustersOutput, error) {
-	input := &ecs.DescribeClustersInput{
-		Clusters: []string{clusterName},
-	}
-
-	return e.client.DescribeClusters(context.Background(), input)
-}
-
 func GetEcsService(ctx context.Context) ECSService {
 	once.Do(func() {
 		cfg, err := config.LoadDefaultConfig(ctx)
@@ -60,9 +42,27 @@ func GetEcsService(ctx context.Context) ECSService {
 		ecsClient := ecs.NewFromConfig(cfg, func(o *ecs.Options) {
 			o.EndpointResolverV2 = &resolverV2{}
 		})
+
 		ecsService = &ECSServiceImpl{client: ecsClient}
 	})
 	return ecsService
+}
+
+type ECSService interface {
+	DescribeClusters(clusterName string) (*ecs.DescribeClustersOutput, error)
+	ListClusters(ctx context.Context) ([]string, error)
+}
+
+type ECSServiceImpl struct {
+	client *ecs.Client
+}
+
+func (e *ECSServiceImpl) DescribeClusters(clusterName string) (*ecs.DescribeClustersOutput, error) {
+	input := &ecs.DescribeClustersInput{
+		Clusters: []string{clusterName},
+	}
+
+	return e.client.DescribeClusters(context.Background(), input)
 }
 
 func (c *ECSServiceImpl) ListClusters(ctx context.Context) ([]string, error) {

@@ -1,6 +1,6 @@
 services:
   motoserver:
     container_name: moto
-    image: ghcr.io/getmoto/motoserver:latest
+    image: ghcr.io/getmoto/motoserver:5.0.14
     ports:
       - "5000:5000"

@@ -3,6 +3,9 @@ on:
     push:
       paths:
       - mkdocs/**
+    pull_request:
+      paths:
+      - mkdocs/**
 jobs:
   markdown_lint:
     runs-on: ubuntu-latest

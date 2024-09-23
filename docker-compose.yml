@@ -4,3 +4,16 @@ services:
     image: ghcr.io/getmoto/motoserver:5.0.14
     ports:
       - "5000:5000"
+
+  moto_init:
+    container_name: moto_init
+    image: amazon/aws-cli:2.17.55
+    environment:
+        - AWS_DEFAULT_REGION=eu-central-1
+        - AWS_ACCESS_KEY_ID=foo
+        - AWS_SECRET_ACCESS_KEY=bar
+        - AWS_ENDPOINT_URL=http://localhost:5000
+    entrypoint: ["/bin/sh", "-c", "/fixtures.sh"]
+    volumes:
+      - ./compose/moto/fixtures.sh:/fixtures.sh
+    network_mode: service:motoserver

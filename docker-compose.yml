@@ -1,0 +1,10 @@
+---
+services:
+  mkdocs:
+    container_name: mkdocs
+    build:
+      context: ./mkdocs
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./mkdocs:/docs"

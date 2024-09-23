@@ -1,0 +1,15 @@
+name: markdown-lint
+on:
+    push:
+      branches:
+        - master 
+        - main
+      paths:
+      - mkdocs/**
+jobs:
+  markdown_lint:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: DavidAnson/markdownlint-cli2-action@v17
+          with:
+            globs: '**/*.md'

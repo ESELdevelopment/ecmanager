@@ -24,3 +24,6 @@ theme:
 
 plugins:
   - search
+  - autolinks
+  - mermaid2
+  - awesome-pages

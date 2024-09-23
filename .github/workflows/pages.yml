@@ -6,6 +6,12 @@ on:
       - main
     paths:
     - mkdocs/**
+  pull_request:
+    branches:
+      - master 
+      - main
+    paths:
+    - mkdocs/**
 permissions:
   contents: write
 jobs:

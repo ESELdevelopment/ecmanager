@@ -1,9 +1,6 @@
 name: markdown-lint
 on:
     push:
-      branches:
-        - master 
-        - main
       paths:
       - mkdocs/**
 jobs:

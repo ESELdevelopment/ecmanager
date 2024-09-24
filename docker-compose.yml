@@ -2,6 +2,10 @@ services:
   motoserver:
     container_name: moto
     image: ghcr.io/getmoto/motoserver:5.0.14
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5000/moto-api/data.json" ]
+      interval: 1s
+      timeout: 5s
     ports:
       - "5000:5000"
 
@@ -9,11 +13,14 @@ services:
     container_name: moto_init
     image: amazon/aws-cli:2.17.55
     environment:
-        - AWS_DEFAULT_REGION=eu-central-1
-        - AWS_ACCESS_KEY_ID=foo
-        - AWS_SECRET_ACCESS_KEY=bar
-        - AWS_ENDPOINT_URL=http://localhost:5000
-    entrypoint: ["/bin/sh", "-c", "/fixtures.sh"]
+      - AWS_DEFAULT_REGION=eu-central-1
+      - AWS_ACCESS_KEY_ID=foo
+      - AWS_SECRET_ACCESS_KEY=bar
+      - AWS_ENDPOINT_URL=http://localhost:5000
+    entrypoint: [ "/bin/bash", "-c", "cd /app && bash fixtures.sh" ]
     volumes:
-      - ./compose/moto/fixtures.sh:/fixtures.sh
+      - ./compose/moto:/app:ro
+    depends_on:
+      motoserver:
+        condition: service_healthy
     network_mode: service:motoserver

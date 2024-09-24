@@ -1,7 +1,7 @@
 package calc_test
 
 import (
-	calc "ecmanager/internal/api"
+	calc "github.com/ESELDevelopment/ecmanager/internal/api"
 	"testing"
 )
 

@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
-	"ecmanager/internal/aws"
 	"encoding/json"
 	"fmt"
+	"github.com/ESELDevelopment/ecmanager/internal/aws"
 	"log"
 )
 

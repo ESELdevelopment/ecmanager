@@ -2,7 +2,8 @@
 
 ## Description
 
-Please include a summary of the changes and the related issue. Explain the problem that this pull request solves or the new feature it introduces.
+Please include a summary of the changes and the related issue. Explain the problem that this pull request solves or the
+new feature it introduces.
 
 Fixes #(issue number)
 
@@ -29,6 +30,7 @@ Fixes #(issue number)
 Please explain step-by-step how to review this PR.
 
 Example:
+
 - Starting the mock-server
 - create Cluster
 - start ecmanger and navigate to the cluster-view

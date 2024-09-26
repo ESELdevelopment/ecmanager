@@ -37,7 +37,7 @@ aws --endpoint-url=http://localhost:5000 ecs create-cluster --cluster-name test-
 aws --endpoint-url=http://localhost:5000 ecs ...
 ```
 
-###  Local Documentation
+### Local Documentation
 
 If you want to use our Documentation (mkdocs-material) Local, we have prepared a docker-compose file for you.
 Just run the following command:

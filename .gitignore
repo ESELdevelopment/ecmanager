@@ -29,3 +29,8 @@ tmp/
 # Project build
 main
 *templ.go
+
+# Python
+venv
+.venv
+__pycache__

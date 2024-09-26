@@ -1,4 +1,4 @@
-#!/usw/bin/env python
+#!/usr/bin/env python
 
 import boto3
 import os
@@ -21,10 +21,12 @@ definition = client.register_task_definition(
   ],
 )
 
+task_definition_arn = definition["taskDefinition"]["taskDefinitionArn"]
+
 client.create_service(
   cluster=cluster_name,
   serviceName="hello_service",
-  taskDefinition="test_ecs_task",
+  taskDefinition=task_definition_arn,
   desiredCount=2,
   platformVersion="2",
 )
@@ -33,7 +35,7 @@ client.run_task(
   launchType="FARGATE",
   cluster=cluster_name,
   overrides={},
-  taskDefinition="test_ecs_task",
+  taskDefinition=task_definition_arn,
   count=2,
   startedBy="moto",
 )

@@ -8,7 +8,7 @@ services:
       interval: 1s
       timeout: 5s
     environment:
-      - MOTO_ECS_SERVICE_RUNNING=3
+      - MOTO_ECS_SERVICE_RUNNING=2
     ports:
       - "5000:5000"
 
@@ -37,4 +37,3 @@ services:
       - "8000:8000"
     volumes:
       - "./mkdocs:/docs"
-

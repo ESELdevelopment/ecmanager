@@ -4,6 +4,8 @@ on:
     branches:
       - main
       - master
+    paths-ignore:
+      - 'mkdocs/**'
   pull_request:
 
 permissions:

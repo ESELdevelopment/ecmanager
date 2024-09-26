@@ -1,6 +1,15 @@
+---
 services:
   motoserver:
     container_name: moto
     image: ghcr.io/getmoto/motoserver:5.0.14
     ports:
       - "5000:5000"
+  mkdocs:
+    container_name: mkdocs
+    build:
+      context: ./mkdocs
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./mkdocs:/docs"

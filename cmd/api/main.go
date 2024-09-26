@@ -1,7 +1,7 @@
 package main
 
 import (
-	calc "ecmanager/internal/api"
+	calc "github.com/ESELDevelopment/ecmanager/internal/api"
 )
 
 func main() {

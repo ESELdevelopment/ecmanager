@@ -18,7 +18,7 @@ var (
 type resolverV2 struct {
 }
 
-func (*resolverV2) ResolveEndpoint(ctx context.Context, params ecs.EndpointParameters) (
+func (r *resolverV2) ResolveEndpoint(ctx context.Context, params ecs.EndpointParameters) (
 	smithyendpoints.Endpoint, error) {
 	u := os.Getenv("AWS_ENDPOINT_URL")
 	if u != "" {

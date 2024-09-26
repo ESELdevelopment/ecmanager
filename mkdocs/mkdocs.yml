@@ -1,0 +1,28 @@
+site_name: My site
+site_url: https://eseldevelopment.github.io/ecmanager
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: black
+  logo: assets/img/eselLogo.png
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tracking
+    - navigation.sections
+    - navigation.tabs.sticky
+    - navigation.expand
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+
+plugins:
+  - search
+  - autolinks
+  - mermaid2
+  - awesome-pages

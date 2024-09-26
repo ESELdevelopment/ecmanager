@@ -1,3 +1,4 @@
+---
 services:
   motoserver:
     container_name: moto
@@ -24,3 +25,13 @@ services:
       motoserver:
         condition: service_healthy
     network_mode: service:motoserver
+
+  mkdocs:
+    container_name: mkdocs
+    build:
+      context: ./mkdocs
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./mkdocs:/docs"
+

@@ -1,9 +1,9 @@
 name: Go-test
-on: 
+on:
   push:
     paths-ignore:
       - 'mkdocs/**'
-  pull_request:
+  pull_request :
     paths-ignore:
       - 'mkdocs/**'
 jobs:

@@ -3,8 +3,32 @@ services:
   motoserver:
     container_name: moto
     image: ghcr.io/getmoto/motoserver:5.0.14
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5000/moto-api/data.json" ]
+      interval: 1s
+      timeout: 5s
+    environment:
+      - MOTO_ECS_SERVICE_RUNNING=2
     ports:
       - "5000:5000"
+
+  moto_init:
+    container_name: moto_init
+    build:
+      context: ./compose/moto
+      dockerfile: setup.Dockerfile
+    environment:
+      - AWS_DEFAULT_REGION=eu-central-1
+      - AWS_ACCESS_KEY_ID=foo
+      - AWS_SECRET_ACCESS_KEY=bar
+      - AWS_ENDPOINT_URL=http://localhost:5000
+    volumes:
+      - ./compose/moto:/app:ro
+    depends_on:
+      motoserver:
+        condition: service_healthy
+    network_mode: service:motoserver
+
   mkdocs:
     container_name: mkdocs
     build:

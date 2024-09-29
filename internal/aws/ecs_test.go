@@ -23,7 +23,7 @@ func TestGetEcsService(t *testing.T) {
 	assert.Equal(t, ecsService, ecsService2)
 }
 
-func TestECSService_DescribeClusters(t *testing.T) {
+func TestECSServiceImpl_DescribeClusters(t *testing.T) {
 	type args struct {
 		ctx                context.Context
 		withApiOptionsFunc func(stack *smithyMiddleware.Stack) error

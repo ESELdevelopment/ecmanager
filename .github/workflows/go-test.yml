@@ -1,6 +1,8 @@
 name: Go-test
 on:
   push:
+    branches:
+      - main
     paths-ignore:
       - 'mkdocs/**'
   pull_request :

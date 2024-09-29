@@ -1,8 +1,5 @@
 name: markdown-lint
 on:
-    push:
-      paths:
-      - mkdocs/**
     pull_request:
       paths:
       - mkdocs/**

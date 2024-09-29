@@ -34,3 +34,4 @@ main
 venv
 .venv
 __pycache__
+site

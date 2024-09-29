@@ -50,8 +50,13 @@ markdown_extensions:
   - toc:
       permalink: true
 
+extra_css:
+  - stylesheets/decision.css
+
 plugins:
   - search
   - autolinks
   - mermaid2
   - awesome-pages
+  - macros
+

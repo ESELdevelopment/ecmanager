@@ -8,7 +8,7 @@ After that you need to add the file to the `mkdocs.yml` under the key **extra_cs
 To create different styles for dark and light mode, you need to define your classes
 as followed:
   
-  ```css
+```css
 /* Light Style */
 [data-md-color-scheme="default"] .some-class {
   color: black;

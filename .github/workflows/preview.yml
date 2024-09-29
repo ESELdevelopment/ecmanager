@@ -1,0 +1,32 @@
+name: Deploy PR previews
+concurrency: preview-${{ github.ref }}
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+jobs:
+  deploy-preview-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - run: (cd mkdocs && sh build.sh)
+        if: github.event.action != 'closed'
+      - uses: rossjrw/pr-preview-action@v1
+        with:
+          token: '${{ github.token }}'
+          source-dir: ./mkdocs/site/
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
+      - uses: rossjrw/pr-preview-action@v1
+        if: github.event.action == 'closed'
+        with:
+          token: '${{ github.token }}'
+          source-dir: ./mkdocs/site/
+          action: remove

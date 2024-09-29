@@ -10,4 +10,5 @@ vulnerability, instead send your report privately to us
 
 ## Supported Versions
 
-At the current state of development, we are only supporting the latest version, published under [Releases](https://github.com/ESELdevelopment/ecmanager/releases).
+At the current state of development, we are only supporting the latest version, published
+under [Releases](https://github.com/ESELdevelopment/ecmanager/releases).

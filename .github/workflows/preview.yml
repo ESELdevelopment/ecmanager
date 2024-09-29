@@ -7,6 +7,8 @@ on:
       - reopened
       - synchronize
       - closed
+    paths:
+      - mkdocs/**
 jobs:
   deploy-preview-pages:
     runs-on: ubuntu-latest

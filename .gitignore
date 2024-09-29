@@ -1,3 +1,6 @@
+# MACOSX
+.DS_STORE
+
 # Binaries for programs and plugins
 *.exe
 *.exe~

@@ -3,6 +3,8 @@ repo_url: https://github.com/ESELdevelopment/ecmanager
 site_url: https://eseldevelopment.github.io/ecmanager
 theme:
   name: material
+  logo: assets/img/eselLogo.png
+  favicon: assets/img/favicon.ico
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -20,7 +22,6 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
-  logo: assets/img/eselLogo.png
   features:
     - navigation.instant
     - navigation.instant.prefetch

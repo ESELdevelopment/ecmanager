@@ -51,3 +51,5 @@ We have a very simple setup and don't need a lot of configuration. Therefore,
 Dependabot is the better choice for us, because it is native in GitHub and has
 no overhead to maintain. Because of the reduced features, it hat also a
 reduced complexity.
+
+{{ decision("We use dependabot") }}

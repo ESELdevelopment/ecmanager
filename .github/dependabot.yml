@@ -6,7 +6,7 @@ updates:
     schedule:
       interval: "weekly"
       day: monday
-      time: "08:00"
+      time: "14:00"
       timezone: Europe/Berlin
     groups:
       actions:
@@ -20,7 +20,7 @@ updates:
     schedule:
       interval: "weekly"
       day: monday
-      time: "08:00"
+      time: "14:00"
       timezone: Europe/Berlin
     groups:
       go:
@@ -34,7 +34,7 @@ updates:
     schedule:
       interval: "weekly"
       day: monday
-      time: "08:00"
+      time: "14:00"
       timezone: Europe/Berlin
     groups:
       python:

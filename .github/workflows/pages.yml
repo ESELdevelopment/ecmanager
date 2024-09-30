@@ -29,4 +29,10 @@ jobs:
       - run: pip install -r ./mkdocs/requirements.txt
       - run: |
               cd ./mkdocs
-              mkdocs gh-deploy
+              mkdocs build
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: mkdocs/site
+          branch: gh-pages
+          clean-exclude: pr-preview/
+          force: false

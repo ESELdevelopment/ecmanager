@@ -10,7 +10,11 @@ updates:
       timezone: Europe/Berlin
     groups:
       actions:
-        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: gomod
     directory: "/"
     schedule:
@@ -20,7 +24,11 @@ updates:
       timezone: Europe/Berlin
     groups:
       go:
-        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
   - package-ecosystem: pip
     directory: "/"
     schedule:
@@ -30,4 +38,8 @@ updates:
       timezone: Europe/Berlin
     groups:
       python:
-        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"

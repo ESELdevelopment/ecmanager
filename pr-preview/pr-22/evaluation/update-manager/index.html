@@ -726,39 +726,39 @@ in the repository.</p>
 <tbody>
 <tr>
 <td>Hosting</td>
-<td>:red_circle: as service, connected via GitHub App (self hosted is possible, but no option for us)</td>
-<td>:green_circle: native in GitHub</td>
+<td><img alt="🔴" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f534.svg" title=":red_circle:" /> as service, connected via GitHub App (self hosted is possible, but no option for us)</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> native in GitHub</td>
 </tr>
 <tr>
 <td>Configuration</td>
-<td>:green_circle: endless configuration via JSON and Environment Variables</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> endless configuration via JSON and Environment Variables</td>
 <td>:orange: limited, but simple configuration via YAML</td>
 </tr>
 <tr>
 <td>Cost</td>
-<td>:green_circle: free</td>
-<td>:green_circle: free</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> free</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> free</td>
 </tr>
 <tr>
 <td>Security</td>
-<td>:red_circle: hosted by Mend (write access from an app)</td>
-<td>:green_circle: native in GitHub, no rights needed</td>
+<td><img alt="🔴" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f534.svg" title=":red_circle:" /> hosted by Mend (write access from an app)</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> native in GitHub, no rights needed</td>
 </tr>
 <tr>
 <td>Grouping</td>
-<td>:green_circle: via <code>packageRules</code></td>
-<td>:green_circle: via groups</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> via <code>packageRules</code></td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> via groups</td>
 </tr>
 </tbody>
 </table>
 <!-- markdownlint-enable MD013 -->
 
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<div class=decision-box><svg viewbox="0 0 24 24"height=24 width=24 xmlns=http://www.w3.org/2000/svg><path d="M0 0h24v24H0V0z"fill=none /><path d="M14 4l2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4h-6zm-4 0H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3L10 4z"fill=green /></svg><div class=decision-content><p>We use Dependabot as our update manager</div></div>
+
 <p>We have a very simple setup and don't need a lot of configuration. Therefore,
-Dependabot is the better choice for us, because it is native in GitHub and has
-no overhead to maintain. Because of the reduced features, it hat also a
-reduced complexity.</p>
-<div class=decision-box><svg viewbox="0 0 24 24"height=24 width=24 xmlns=http://www.w3.org/2000/svg><path d="M0 0h24v24H0V0z"fill=none /><path d="M14 4l2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4h-6zm-4 0H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3L10 4z"fill=green /></svg><div class=decision-content><p>We use dependabot</div></div>
+Dependabot is the better choice for us. It is native integrated in GitHub and has
+no overhead to maintain.</p>
 
 
 

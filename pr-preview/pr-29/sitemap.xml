@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://eseldevelopment.github.io/ecmanager/</loc>
+         <lastmod>2024-09-30</lastmod>
+    </url>
+    <url>
+         <loc>https://eseldevelopment.github.io/ecmanager/evaluation/</loc>
+         <lastmod>2024-09-30</lastmod>
+    </url>
+    <url>
+         <loc>https://eseldevelopment.github.io/ecmanager/evaluation/tui-plugin/</loc>
+         <lastmod>2024-09-30</lastmod>
+    </url>
+    <url>
+         <loc>https://eseldevelopment.github.io/ecmanager/playground/</loc>
+         <lastmod>2024-09-30</lastmod>
+    </url>
+    <url>
+         <loc>https://eseldevelopment.github.io/ecmanager/technical/</loc>
+         <lastmod>2024-09-30</lastmod>
+    </url>
+    <url>
+         <loc>https://eseldevelopment.github.io/ecmanager/technical/local-dev/</loc>
+         <lastmod>2024-09-30</lastmod>
+    </url>
+    <url>
+         <loc>https://eseldevelopment.github.io/ecmanager/technical/local-dev/moto/</loc>
+         <lastmod>2024-09-30</lastmod>
+    </url>
+</urlset>

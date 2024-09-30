@@ -26,9 +26,3 @@ jobs:
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: auto
-      - uses: rossjrw/pr-preview-action@v1
-        if: github.event.action == 'closed'
-        with:
-          token: '${{ github.token }}'
-          source-dir: ./mkdocs/site/
-          action: remove

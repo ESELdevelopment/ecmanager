@@ -40,7 +40,7 @@ To use Dependabot, we have to enable it in the
 | Feature       | Renovate                                                                                          | Dependabot                                                 |
 |---------------|---------------------------------------------------------------------------------------------------|------------------------------------------------------------|
 | Hosting       | :red_circle: as service, connected via GitHub App (self hosted is possible, but no option for us) | :green_circle: native in GitHub                            |
-| Configuration | :green_circle: endless configuration via JSON and Environment Variables                           | :orange:circle: limited, but simple configuration via YAML |
+| Configuration | :green_circle: endless configuration via JSON and Environment Variables                           | :orange_circle: limited, but simple configuration via YAML |
 | Cost          | :green_circle: free                                                                               | :green_circle: free                                        |
 | Security      | :red_circle: hosted by Mend (write access from an app)                                            | :green_circle: native in GitHub, no rights needed          |
 | Grouping      | :green_circle: via `packageRules`                                                                 | :green_circle: via groups                                  |

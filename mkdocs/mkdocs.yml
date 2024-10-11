@@ -1,19 +1,38 @@
-site_name: My site
+site_name: EcManager
+repo_url: https://github.com/ESELdevelopment/ecmanager
 site_url: https://eseldevelopment.github.io/ecmanager
 theme:
   name: material
-  palette:
-    scheme: slate
-    primary: black
   logo: assets/img/eselLogo.png
+  favicon: assets/img/favicon.ico
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
   features:
     - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.preview
     - navigation.tabs
-    - navigation.tracking
-    - navigation.sections
     - navigation.tabs.sticky
-    - navigation.expand
-    - toc.integrate
+    - navigation.tracking
+    - navigation.path
+    - navigation.prune
+    - navigation.indexes
+    - toc.follow
     - navigation.top
     - search.suggest
     - search.highlight
@@ -21,8 +40,24 @@ theme:
     - content.code.annotation
     - content.code.copy
 
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/decision.css
+
 plugins:
   - search
   - autolinks
   - mermaid2
   - awesome-pages
+  - macros
+

@@ -2,7 +2,6 @@ name: github-pages
 on:
   push:
     branches:
-      - master 
       - main
     paths:
     - mkdocs/**
@@ -30,4 +29,10 @@ jobs:
       - run: pip install -r ./mkdocs/requirements.txt
       - run: |
               cd ./mkdocs
-              mkdocs gh-deploy --force
+              mkdocs build
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: mkdocs/site
+          branch: gh-pages
+          clean-exclude: pr-preview/
+          force: false

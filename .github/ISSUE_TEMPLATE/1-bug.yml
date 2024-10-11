@@ -3,6 +3,8 @@ description: Create a report to help us improve
 title: "[BUG] "
 labels:
   - "bug"
+projects:
+  - ESELdevelopment/3
 
 body:
   - type: markdown
@@ -76,4 +78,3 @@ body:
       options:
         - label: I agree to follow this project's Code of Conduct
           required: true
-          

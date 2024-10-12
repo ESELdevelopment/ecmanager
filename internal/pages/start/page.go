@@ -15,9 +15,8 @@ type tickMsg time.Time
 type page struct {
 	progress progress.Model
 
-	router   pages.Router
-	quitting bool
-	err      error
+	router pages.Router
+	err    error
 }
 
 var quitKeys = key.NewBinding(
@@ -57,7 +56,6 @@ func (m page) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
 		if key.Matches(msg, quitKeys) {
-			m.quitting = true
 			return m, tea.Quit
 		}
 		if key.Matches(msg, navKeys) && m.progress.Percent() == 1.0 {
@@ -90,9 +88,6 @@ func (m page) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (m page) View() string {
 	if m.err != nil {
 		return m.err.Error()
-	}
-	if m.quitting {
-		return "Goodbye!"
 	}
 	msg := "Loading... \n" + m.progress.View()
 	if m.progress.Percent() == 1.0 {

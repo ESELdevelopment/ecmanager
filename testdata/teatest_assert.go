@@ -18,7 +18,3 @@ func WaitForString(t *testing.T, tm *teatest.TestModel, s string) {
 		teatest.WithDuration(time.Second*1),
 	)
 }
-
-func PrintSomething() {
-	panic("Hello, world!")
-}

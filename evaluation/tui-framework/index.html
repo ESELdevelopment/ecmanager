@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://eseldevelopment.github.io/ecmanager/evaluation/tui-plugin/">
+        <link rel="canonical" href="https://eseldevelopment.github.io/ecmanager/evaluation/tui-framework/">
       
       
         <link rel="prev" href="../">
@@ -22,7 +22,7 @@
     
     
       
-        <title>TODO - EcManager</title>
+        <title>TUI-Framework - EcManager</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#todo" class="md-skip">
+        <a href="#tui-framework" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TODO
+              TUI-Framework
             
           </span>
         </div>
@@ -429,15 +429,90 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    TUI-Framework
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    TODO
+    TUI-Framework
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frameworks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bubbletea" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bubbletea
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparison
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -544,6 +619,59 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Frameworks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bubbletea" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bubbletea
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comparison
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -560,7 +688,83 @@
   
 
 
-<h1 id="todo">TODO<a class="headerlink" href="#todo" title="Permanent link">&para;</a></h1>
+<h1 id="tui-framework">TUI-Framework<a class="headerlink" href="#tui-framework" title="Permanent link">&para;</a></h1>
+<p>We want to use a framework to build a TUI for our application. We will
+evaluate the most popular TUI frameworks for Go and choose the one
+that best fits our needs.</p>
+<h2 id="frameworks">Frameworks<a class="headerlink" href="#frameworks" title="Permanent link">&para;</a></h2>
+<p>There are many frameworks for building TUI in GO but the main ones
+are <strong>Tview</strong> and <strong>Bubbletea</strong>. They have the most documentation
+and biggest user bases so we will evaluate these two.</p>
+<h2 id="tview">Tview<a class="headerlink" href="#tview" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rivo/tview">Tview</a> is a fast, flexible UI framework
+for building rich terminal applications in Golang. It offers widgets like tables,
+forms, and modals, making interactive console apps easy to create.
+Built on <code>tcell</code>, it ensures cross-platform compatibility while handling
+terminal operations. It works best for UIs with less dynamic updates.</p>
+<p>The greates project using tview is <a href="https://github.com/derailed/k9s">k9s</a></p>
+<h2 id="bubbletea">Bubbletea<a class="headerlink" href="#bubbletea" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/charmbracelet/bubbletea">Bubble Tea</a> is a flexible,
+reactive framework for building terminal applications in Golang using the
+Model-Update-View (MVU) architecture. It allows developers to create
+highly interactive and dynamic UIs by handling asynchronous events and
+updates seamlessly. Unlike traditional imperative UI frameworks,
+Bubble Tea promotes a declarative style, where the UI is a function of
+the application's state. This makes it more flexible for building applications
+with complex interactions and real-time updates.</p>
+<p>As part of the charmbracelet suite, Bubble Tea is well-documented and
+actively maintained. It is used in popular projects like
+<a href="https://github.com/yorukot/superfile">Superfile</a>. Additionally,
+Bubble Tea has also great plugins for
+styling like <a href="https://github.com/charmbracelet/lipgloss">lipgloss</a>
+and <a href="https://github.com/charmbracelet/glamour">glamour</a>.</p>
+<h2 id="comparison">Comparison<a class="headerlink" href="#comparison" title="Permanent link">&para;</a></h2>
+<!-- markdownlint-disable MD013 -->
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Tview</th>
+<th>Bubble Tea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Architecture</td>
+<td><img alt="🟠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e0.svg" title=":orange_circle:" /> Imperative</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> Declarative</td>
+</tr>
+<tr>
+<td>Dynamic UI</td>
+<td><img alt="🟠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e0.svg" title=":orange_circle:" /> Limited</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> Flexible</td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /></td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /></td>
+</tr>
+<tr>
+<td>Community</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /></td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /></td>
+</tr>
+<tr>
+<td>Templates</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> built-in</td>
+<td><img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f7e2.svg" title=":green_circle:" /> extensions like <a href="https://github.com/charmbracelet/bubbles">bubbles</a></td>
+</tr>
+</tbody>
+</table>
+<!-- markdownlint-enable MD013 -->
+
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<div class=decision-box><svg viewbox="0 0 24 24"height=24 width=24 xmlns=http://www.w3.org/2000/svg><path d="M0 0h24v24H0V0z"fill=none /><path d="M14 4l2.29 2.29-2.88 2.88 1.42 1.42 2.88-2.88L20 10V4h-6zm-4 0H4v6l2.29-2.29 4.71 4.7V20h2v-8.41l-5.29-5.3L10 4z"fill=green /></svg><div class=decision-content><p>We use bubble tea with lipgloss and glamour for styling</div></div>
+
+<p>With the declarative architecture, simplicity and flexibility of Bubble Tea,
+we can build a highly interactive and dynamic TUI for our application.
+Additionally, the availability of plugins like lipgloss and glamour allows
+us to style our UI easily.</p>
 
 
 

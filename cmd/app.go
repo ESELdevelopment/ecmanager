@@ -9,7 +9,7 @@ import (
 )
 
 func Start() {
-	p := tea.NewProgram(pages.NewStartPage(), tea.WithAltScreen(), tea.WithMouseAllMotion())
+	p := tea.NewProgram(pages.Router(), tea.WithAltScreen(), tea.WithMouseAllMotion())
 	if _, err := p.Run(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)

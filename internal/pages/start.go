@@ -22,10 +22,14 @@ var quitKeys = key.NewBinding(
 	key.WithHelp("", "press q/crtl+c to quit"),
 )
 
+var navKeys = key.NewBinding(
+	key.WithKeys("n", "ctrl+n"),
+	key.WithHelp("", "press n/crtl+n to navigate"),
+)
+
 var style = lipgloss.NewStyle().
 	Padding(2, 4).
-	Align(lipgloss.Center).
-	AlignVertical(lipgloss.Center)
+	Align(lipgloss.Center, lipgloss.Center)
 
 func NewStartPage() StartPage {
 	p := progress.New(progress.WithDefaultGradient())
@@ -54,6 +58,9 @@ func (m StartPage) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.quitting = true
 			return m, tea.Quit
 		}
+		if key.Matches(msg, navKeys) {
+			return Router().Navigate(NewExamplePage())
+		}
 		return m, nil
 	case tea.WindowSizeMsg:
 		style = style.Width(msg.Width).Height(msg.Height)
@@ -64,7 +71,7 @@ func (m StartPage) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, nil
 		}
 
-		cmd := m.progress.IncrPercent(0.25)
+		cmd := m.progress.IncrPercent(0.04)
 		return m, tea.Batch(tickCmd(), cmd)
 
 	// FrameMsg is sent when the progress bar wants to animate itself
@@ -87,7 +94,7 @@ func (m StartPage) View() string {
 	}
 	msg := "Loading... \n" + m.progress.View()
 	if m.progress.Percent() == 1.0 {
-		msg = "Hello, World!"
+		msg = "Hello, World! \n" + navKeys.Help().Desc
 	}
 
 	return style.Render(msg + "\n" + quitKeys.Help().Desc)

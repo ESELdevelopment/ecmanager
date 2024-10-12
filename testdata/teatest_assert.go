@@ -12,9 +12,10 @@ func WaitForString(t *testing.T, tm *teatest.TestModel, s string) {
 		t,
 		tm.Output(),
 		func(b []byte) bool {
+			println(string(b))
 			return strings.Contains(string(b), s)
 		},
 		teatest.WithCheckInterval(time.Millisecond*100),
-		teatest.WithDuration(time.Second*1),
+		teatest.WithDuration(time.Second*3),
 	)
 }

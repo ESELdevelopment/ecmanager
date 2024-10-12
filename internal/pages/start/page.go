@@ -1,19 +1,17 @@
 package start
 
 import (
+	"fmt"
 	"github.com/ESELDevelopment/ecmanager/internal/pages"
 	"github.com/ESELDevelopment/ecmanager/internal/pages/example"
 	"github.com/charmbracelet/bubbles/key"
-	"github.com/charmbracelet/bubbles/progress"
+	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
-	"time"
 )
 
-type tickMsg time.Time
-
 type page struct {
-	progress progress.Model
+	spinner spinner.Model
 
 	router pages.Router
 	err    error
@@ -24,30 +22,26 @@ var quitKeys = key.NewBinding(
 	key.WithHelp("", "press q/crtl+c to quit"),
 )
 
-var navKeys = key.NewBinding(
-	key.WithKeys("n", "ctrl+n"),
-	key.WithHelp("", "press n/crtl+n to navigate"),
+var stopKeys = key.NewBinding(
+	key.WithKeys("s"),
+	key.WithHelp("", "press s to stop spinner"),
 )
 
 var style = lipgloss.NewStyle().
 	Align(lipgloss.Center, lipgloss.Center)
 
 func New(router pages.Router) tea.Model {
-	p := progress.New(progress.WithDefaultGradient())
+	s := spinner.New()
+	s.Spinner = spinner.Monkey
+	s.Style = lipgloss.NewStyle().Foreground(lipgloss.Color("205"))
 
-	return page{progress: p, router: router}
-}
-
-func tickCmd() tea.Cmd {
-	return tea.Tick(time.Second*1, func(t time.Time) tea.Msg {
-		return tickMsg(t)
-	})
+	return page{spinner: s, router: router}
 }
 
 func (m page) Init() tea.Cmd {
 	cmd := []tea.Cmd{
 		tea.SetWindowTitle("ECManager"),
-		tickCmd(),
+		m.spinner.Tick,
 	}
 	return tea.Batch(cmd...)
 }
@@ -58,28 +52,17 @@ func (m page) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		if key.Matches(msg, quitKeys) {
 			return m, tea.Quit
 		}
-		if key.Matches(msg, navKeys) && m.progress.Percent() == 1.0 {
+		if key.Matches(msg, stopKeys) {
 			return m.router.Navigate(example.New(m.router))
 		}
 		return m, nil
+	case spinner.TickMsg:
+		var cmd tea.Cmd
+		m.spinner, cmd = m.spinner.Update(msg)
+		return m, cmd
 	case tea.WindowSizeMsg:
 		style = style.Width(msg.Width).Height(msg.Height)
 		return m, nil
-
-	case tickMsg:
-		if m.progress.Percent() == 1.0 {
-			return m, nil
-		}
-
-		cmd := m.progress.IncrPercent(0.125)
-		return m, tea.Batch(tickCmd(), cmd)
-
-	// FrameMsg is sent when the progress bar wants to animate itself
-	case progress.FrameMsg:
-		progressModel, cmd := m.progress.Update(msg)
-		m.progress = progressModel.(progress.Model)
-		return m, cmd
-
 	default:
 		return m, nil
 	}
@@ -89,10 +72,12 @@ func (m page) View() string {
 	if m.err != nil {
 		return m.err.Error()
 	}
-	msg := "Loading... \n" + m.progress.View()
-	if m.progress.Percent() == 1.0 {
-		msg = "Hello, World! \n" + navKeys.Help().Desc
-	}
 
-	return style.Render(msg + "\n" + quitKeys.Help().Desc)
+	msg := fmt.Sprintf("%s Loading... \n", m.spinner.View())
+
+	return style.Render(
+		msg,
+		stopKeys.Help().Desc+"\n",
+		quitKeys.Help().Desc,
+	)
 }

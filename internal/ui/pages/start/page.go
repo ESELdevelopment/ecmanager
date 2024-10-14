@@ -2,8 +2,8 @@ package start
 
 import (
 	"fmt"
-	"github.com/ESELDevelopment/ecmanager/internal/pages"
-	"github.com/ESELDevelopment/ecmanager/internal/pages/example"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages/example"
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"

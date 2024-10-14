@@ -1,7 +1,7 @@
 package start_test
 
 import (
-	"github.com/ESELDevelopment/ecmanager/internal/pages/start"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages/start"
 	"github.com/ESELDevelopment/ecmanager/testdata"
 	"github.com/charmbracelet/x/exp/teatest"
 	"github.com/stretchr/testify/assert"

@@ -4,7 +4,7 @@ This site contains conventions about our pages.
 
 ## Where to find and create pages
 
-All pages are located in the `internal/pages` folder. To create a new page,
+All pages are located in the `internal/ui/pages` folder. To create a new page,
 create a new folder with the name of the page and add a `page.go` file.
 
 ## Go Conventions

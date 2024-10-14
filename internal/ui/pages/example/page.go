@@ -1,8 +1,8 @@
 package example
 
 import (
-	"github.com/ESELDevelopment/ecmanager/internal/pages"
-	"github.com/ESELDevelopment/ecmanager/internal/pages/quit"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages/quit"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 )

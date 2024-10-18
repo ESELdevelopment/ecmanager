@@ -11,6 +11,7 @@ import (
 type regions struct {
 	currentRegion string
 	index         int
+	width         int
 }
 
 var supportedRegions = []string{
@@ -24,7 +25,14 @@ type RegionChanged struct {
 
 func (p regions) Init() tea.Cmd {
 	p.index = 4
-	return nil
+	p.currentRegion = supportedRegions[p.index]
+	return createRegionChangedCmd(p.currentRegion)
+}
+
+func createRegionChangedCmd(region string) tea.Cmd {
+	return func() tea.Msg {
+		return RegionChanged{region}
+	}
 }
 
 var numbers = key.NewBinding(key.WithKeys("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"))
@@ -35,32 +43,36 @@ func (p regions) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		if key.Matches(msg.(tea.KeyMsg), numbers) {
 			p.index, _ = strconv.Atoi(msg.(tea.KeyMsg).String())
 			p.currentRegion = supportedRegions[p.index]
-			return p, func() tea.Msg {
-				return RegionChanged{Value: p.currentRegion}
-			}
+			return p, createRegionChangedCmd(p.currentRegion)
 		}
+	case tea.WindowSizeMsg:
+		p.width = msg.(tea.WindowSizeMsg).Width / 3
 	}
 	return p, nil
 }
 
 func (p regions) View() string {
-	enumeratorStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("99")).MarginRight(1)
-	itemStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("212")).MarginRight(1)
-	numCols := 2
+	return lipgloss.NewStyle().Border(lipgloss.NormalBorder(), true).BorderForeground(lipgloss.Color("123")).Render(p.createRegionTable())
+}
+
+func (p regions) createRegionTable() string {
+	enumeratorStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#ff00f7")).PaddingRight(1)
+	itemStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#000000")).PaddingRight(3)
+	numCols := 3
 	numRows := (len(supportedRegions) + numCols - 1) / numCols
 
 	columns := make([]string, numCols)
 
 	for i, item := range supportedRegions {
 		col := i / numRows
-		var formattedItem string
 		if item == p.currentRegion {
-			formattedItem = itemStyle.Foreground(lipgloss.Color("100")).Render(item)
+			formattedItem := itemStyle.Foreground(lipgloss.Color("100")).Render(item)
+			columns[col] += enumeratorStyle.Foreground(lipgloss.Color("100")).Render(fmt.Sprintf("<%d> ", i)) + formattedItem + "\n"
 		} else {
-			formattedItem = itemStyle.Render(item)
+			formattedItem := itemStyle.Render(item)
+			columns[col] += enumeratorStyle.Render(fmt.Sprintf("<%d> ", i)) + formattedItem + "\n"
 		}
-		columns[col] += enumeratorStyle.Render(fmt.Sprintf("%d) ", i)) + formattedItem + "\n"
 	}
 
-	return lipgloss.JoinHorizontal(lipgloss.Top, columns...)
+	return "Regions \n" + lipgloss.JoinHorizontal(lipgloss.Top, columns...)
 }

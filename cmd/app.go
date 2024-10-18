@@ -2,7 +2,9 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/ESELDevelopment/ecmanager/internal/ui/bubbles/header"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages/header"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages/start"
 	"os"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -10,7 +12,7 @@ import (
 
 func Start() {
 	p := tea.NewProgram(
-		header.New("eu-central-1"),
+		header.New(start.New(pages.CreateRouter())),
 		tea.WithAltScreen(),
 		tea.WithMouseAllMotion(),
 		tea.WithFPS(120),

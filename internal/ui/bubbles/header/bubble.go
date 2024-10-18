@@ -9,19 +9,14 @@ type page struct {
 	meta           metadata
 	regions        regions
 	selectedRegion string
+
+	width int
 }
 
-var (
-	modelStyle = lipgloss.NewStyle().
-		Height(5).
-		Align(lipgloss.Center, lipgloss.Center).
-		BorderStyle(lipgloss.HiddenBorder())
-)
-
 func New(currentRegion string) tea.Model {
-	metaPage := metadata{}
+	metaPage := metadata{arn: "arn:aws:iam::123456789012:role/role-name", role: "role-name"}
 	regionPage := regions{currentRegion: currentRegion}
-	return page{metaPage, regionPage, currentRegion}
+	return page{metaPage, regionPage, currentRegion, 80}
 }
 
 func (p page) Init() tea.Cmd {
@@ -43,10 +38,9 @@ func (p page) updateOnMessage(msg tea.Msg) (page, tea.Cmd) {
 		if msg.(tea.KeyMsg).String() == "q" {
 			return p, tea.Quit
 		}
-		if msg.(tea.KeyMsg).String() == "a" {
-			p.selectedRegion = "clicked"
-			return p, nil
-		}
+	case tea.WindowSizeMsg:
+		p.width = msg.(tea.WindowSizeMsg).Width
+		return p, nil
 	case RegionChanged:
 		regionChanged := msg.(RegionChanged)
 		p.selectedRegion = regionChanged.Value
@@ -58,6 +52,14 @@ func (p page) updateOnMessage(msg tea.Msg) (page, tea.Cmd) {
 }
 
 func (p page) View() string {
-	horizontal := lipgloss.JoinHorizontal(lipgloss.Top, p.meta.View(), p.regions.View())
-	return modelStyle.Render(horizontal + "\n" + p.selectedRegion)
+	regionView := p.regions.View()
+	metaView := p.meta.View()
+	regionWith := lipgloss.Width(regionView)
+	metaSize := p.width - regionWith - 1
+	horizontal := lipgloss.JoinHorizontal(
+		lipgloss.Top,
+		lipgloss.NewStyle().Width(metaSize).Render(metaView),
+		lipgloss.NewStyle().Width(regionWith).Render(regionView),
+	)
+	return horizontal
 }

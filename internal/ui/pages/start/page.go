@@ -61,7 +61,7 @@ func (m page) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.spinner, cmd = m.spinner.Update(msg)
 		return m, cmd
 	case tea.WindowSizeMsg:
-		style = style.Width(msg.Width).Height(msg.Height)
+		style = style.Width(msg.Width)
 		return m, nil
 	default:
 		return m, nil

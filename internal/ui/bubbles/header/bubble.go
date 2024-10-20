@@ -1,6 +1,8 @@
 package header
 
 import (
+	"context"
+	"github.com/ESELDevelopment/ecmanager/internal/aws/sts"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 )
@@ -14,9 +16,17 @@ type page struct {
 }
 
 func New(currentRegion string) tea.Model {
-	metaPage := metadata{arn: "arn:aws:iam::123456789012:role/role-name", role: "role-name"}
+	account, userId := getAwsMetadata()
+	metaPage := metadata{arn: *account, userId: *userId}
 	regionPage := regions{currentRegion: currentRegion}
 	return page{metaPage, regionPage, currentRegion, 80}
+}
+
+func getAwsMetadata() (*string, *string) {
+	ctx := context.Background()
+	stsService := sts.GetService(ctx)
+	identity, _ := stsService.GetCallerIdentity(ctx)
+	return identity.Arn, identity.UserId
 }
 
 func (p page) Init() tea.Cmd {
@@ -35,13 +45,12 @@ func (p page) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (p page) updateOnMessage(msg tea.Msg) (page, tea.Cmd) {
-	switch msg.(type) {
+	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
-		p.width = msg.(tea.WindowSizeMsg).Width
+		p.width = msg.Width
 		return p, nil
 	case RegionChanged:
-		regionChanged := msg.(RegionChanged)
-		p.selectedRegion = regionChanged.Value
+		p.selectedRegion = msg.Value
 		return p, nil
 	default:
 		return p, nil

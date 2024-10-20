@@ -9,7 +9,7 @@ import (
 
 type metadata struct {
 	arn    string
-	role   string
+	userId string
 	region string
 	width  int
 }
@@ -19,12 +19,11 @@ func (p metadata) Init() tea.Cmd {
 }
 
 func (p metadata) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg.(type) {
+	switch msg := msg.(type) {
 	case RegionChanged:
-		regionChanged := msg.(RegionChanged)
-		p.region = regionChanged.Value
+		p.region = msg.Value
 	case tea.WindowSizeMsg:
-		p.width = msg.(tea.WindowSizeMsg).Width / 3
+		p.width = msg.Width / 3
 	}
 	return p, nil
 }
@@ -33,6 +32,6 @@ func (p metadata) View() string {
 	return lipgloss.NewStyle().Border(lipgloss.NormalBorder(), true).Width(p.width).MarginRight(1).
 		Render(fmt.Sprintf(`Rev: %s
 region: %s
-account: %s
-role: %s`, info.GetVersion(), p.region, p.arn, p.role))
+arn: %s
+userId: %s`, info.GetVersion(), p.region, p.arn, p.userId))
 }

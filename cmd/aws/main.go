@@ -4,14 +4,14 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/ESELDevelopment/ecmanager/internal/aws"
+	"github.com/ESELDevelopment/ecmanager/internal/aws/ecs"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	ecsService := aws.GetEcsService(ctx)
+	ecsService := ecs.GetService(ctx)
 
 	clusters, err := ecsService.ListClusters(ctx)
 	if err != nil {

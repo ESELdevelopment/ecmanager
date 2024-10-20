@@ -39,7 +39,9 @@ func GetService(ctx context.Context) Service {
 		if err != nil {
 			return
 		}
-		stsClient := sts.NewFromConfig(cfg)
+		stsClient := sts.NewFromConfig(cfg, func(o *sts.Options) {
+			o.EndpointResolverV2 = &resolverV2{}
+		})
 		stsService = &ServiceImpl{client: stsClient}
 	})
 	return stsService

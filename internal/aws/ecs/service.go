@@ -1,4 +1,4 @@
-package aws
+package ecs
 
 import (
 	"context"
@@ -12,7 +12,7 @@ import (
 
 var (
 	once       = &sync.Once{}
-	ecsService *ECSServiceImpl
+	ecsService *ServiceImpl
 )
 
 type resolverV2 struct {
@@ -33,7 +33,7 @@ func (r *resolverV2) ResolveEndpoint(ctx context.Context, params ecs.EndpointPar
 	return ecs.NewDefaultEndpointResolverV2().ResolveEndpoint(ctx, params)
 }
 
-func GetEcsService(ctx context.Context) ECSService {
+func GetService(ctx context.Context) Service {
 	once.Do(func() {
 		cfg, err := config.LoadDefaultConfig(ctx)
 		if err != nil {
@@ -43,21 +43,21 @@ func GetEcsService(ctx context.Context) ECSService {
 			o.EndpointResolverV2 = &resolverV2{}
 		})
 
-		ecsService = &ECSServiceImpl{client: ecsClient}
+		ecsService = &ServiceImpl{client: ecsClient}
 	})
 	return ecsService
 }
 
-type ECSService interface {
+type Service interface {
 	DescribeClusters(ctx context.Context, clusterName string) (*ecs.DescribeClustersOutput, error)
 	ListClusters(ctx context.Context) ([]string, error)
 }
 
-type ECSServiceImpl struct {
+type ServiceImpl struct {
 	client *ecs.Client
 }
 
-func (e *ECSServiceImpl) DescribeClusters(ctx context.Context, clusterName string) (*ecs.DescribeClustersOutput, error) {
+func (e *ServiceImpl) DescribeClusters(ctx context.Context, clusterName string) (*ecs.DescribeClustersOutput, error) {
 	input := &ecs.DescribeClustersInput{
 		Clusters: []string{clusterName},
 	}
@@ -65,7 +65,7 @@ func (e *ECSServiceImpl) DescribeClusters(ctx context.Context, clusterName strin
 	return e.client.DescribeClusters(ctx, input)
 }
 
-func (c *ECSServiceImpl) ListClusters(ctx context.Context) ([]string, error) {
+func (c *ServiceImpl) ListClusters(ctx context.Context) ([]string, error) {
 	var clusters []string
 	input := &ecs.ListClustersInput{}
 	for {

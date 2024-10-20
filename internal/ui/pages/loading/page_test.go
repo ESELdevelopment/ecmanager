@@ -1,7 +1,7 @@
-package start_test
+package loading_test
 
 import (
-	"github.com/ESELDevelopment/ecmanager/internal/pages/start"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages/loading"
 	"github.com/ESELDevelopment/ecmanager/testdata"
 	"github.com/charmbracelet/x/exp/teatest"
 	"github.com/stretchr/testify/assert"
@@ -10,7 +10,7 @@ import (
 )
 
 func TestPageWithNavigation(t *testing.T) {
-	m := start.New(testdata.MockRouter{})
+	m := loading.New(testdata.MockRouter{})
 	tm := teatest.NewTestModel(t, m, teatest.WithInitialTermSize(100, 100))
 
 	testdata.WaitForString(t, tm, " Loading...")
@@ -21,7 +21,7 @@ func TestPageWithNavigation(t *testing.T) {
 }
 
 func TestPageWithQuit(t *testing.T) {
-	m := start.New(testdata.MockRouter{})
+	m := loading.New(testdata.MockRouter{})
 	tm := teatest.NewTestModel(t, m, teatest.WithInitialTermSize(100, 100))
 
 	testdata.WaitForString(t, tm, " Loading...")

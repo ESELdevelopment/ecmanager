@@ -1,7 +1,7 @@
 package quit_test
 
 import (
-	"github.com/ESELDevelopment/ecmanager/internal/pages/quit"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages/quit"
 	"github.com/ESELDevelopment/ecmanager/testdata"
 	"github.com/charmbracelet/x/exp/teatest"
 	"testing"

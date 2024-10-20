@@ -1,12 +1,12 @@
-package aws_test
+package ecs_test
 
 import (
 	"context"
 	"fmt"
-	"github.com/ESELDevelopment/ecmanager/internal/aws"
-	awsSdk "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/ESELDevelopment/ecmanager/internal/aws/ecs"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/aws/aws-sdk-go-v2/service/ecs"
+	ecsSdk "github.com/aws/aws-sdk-go-v2/service/ecs"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	smithyMiddleware "github.com/aws/smithy-go/middleware"
 	"github.com/stretchr/testify/assert"
@@ -17,9 +17,9 @@ import (
 )
 
 func TestGetEcsService(t *testing.T) {
-	ecsService := aws.GetEcsService(context.TODO())
+	ecsService := ecs.GetService(context.TODO())
 	assert.NotNilf(t, ecsService, "GetEcsService() = %v, want not nil", ecsService)
-	ecsService2 := aws.GetEcsService(context.TODO())
+	ecsService2 := ecs.GetService(context.TODO())
 	assert.Equal(t, ecsService, ecsService2)
 }
 
@@ -45,8 +45,8 @@ func TestECSServiceImpl_DescribeClusters(t *testing.T) {
 							"DescribeClustersMock",
 							func(ctx context.Context, input smithyMiddleware.FinalizeInput, handler smithyMiddleware.FinalizeHandler) (smithyMiddleware.FinalizeOutput, smithyMiddleware.Metadata, error) {
 								return smithyMiddleware.FinalizeOutput{
-									Result: &ecs.DescribeClustersOutput{
-										Clusters:       []types.Cluster{{ClusterName: awsSdk.String(`clusterName`)}},
+									Result: &ecsSdk.DescribeClustersOutput{
+										Clusters:       []types.Cluster{{ClusterName: aws.String(`clusterName`)}},
 										Failures:       nil,
 										ResultMetadata: smithyMiddleware.Metadata{},
 									},
@@ -54,7 +54,7 @@ func TestECSServiceImpl_DescribeClusters(t *testing.T) {
 							},
 						), smithyMiddleware.Before)
 				}},
-			want:    []types.Cluster{{ClusterName: awsSdk.String(`clusterName`)}},
+			want:    []types.Cluster{{ClusterName: aws.String(`clusterName`)}},
 			wantErr: false,
 		},
 	}
@@ -71,8 +71,8 @@ func TestECSServiceImpl_DescribeClusters(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			client := ecs.NewFromConfig(cfg)
-			ecsService := aws.ECSServiceImpl{}
+			client := ecsSdk.NewFromConfig(cfg)
+			ecsService := ecs.ServiceImpl{}
 			setFieldValue(&ecsService, "client", client)
 
 			response, e := ecsService.DescribeClusters(tt.args.ctx, "clusterName")
@@ -119,10 +119,10 @@ func TestECSServiceImpl_ListClusters(t *testing.T) {
 						smithyMiddleware.FinalizeMiddlewareFunc(
 							"ListClustersMock",
 							func(ctx context.Context, input smithyMiddleware.FinalizeInput, handler smithyMiddleware.FinalizeHandler) (smithyMiddleware.FinalizeOutput, smithyMiddleware.Metadata, error) {
-								request := GetCustomKey(ctx).(*ecs.ListClustersInput)
+								request := GetCustomKey(ctx).(*ecsSdk.ListClustersInput)
 								if request.NextToken != nil {
 									return smithyMiddleware.FinalizeOutput{
-										Result: &ecs.ListClustersOutput{
+										Result: &ecsSdk.ListClustersOutput{
 											ClusterArns: []string{"clusterArn2"},
 											NextToken:   nil,
 										},
@@ -130,9 +130,9 @@ func TestECSServiceImpl_ListClusters(t *testing.T) {
 								}
 
 								return smithyMiddleware.FinalizeOutput{
-									Result: &ecs.ListClustersOutput{
+									Result: &ecsSdk.ListClustersOutput{
 										ClusterArns: []string{"clusterArn1"},
-										NextToken:   awsSdk.String("nextToken"),
+										NextToken:   aws.String("nextToken"),
 									},
 								}, smithyMiddleware.Metadata{}, nil
 							},
@@ -172,8 +172,8 @@ func TestECSServiceImpl_ListClusters(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			client := ecs.NewFromConfig(cfg)
-			ecsService := aws.ECSServiceImpl{}
+			client := ecsSdk.NewFromConfig(cfg)
+			ecsService := ecs.ServiceImpl{}
 			setFieldValue(&ecsService, "client", client)
 
 			list, e := ecsService.ListClusters(tt.args.ctx)

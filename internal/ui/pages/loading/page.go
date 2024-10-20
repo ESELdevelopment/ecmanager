@@ -1,9 +1,9 @@
-package start
+package loading
 
 import (
 	"fmt"
-	"github.com/ESELDevelopment/ecmanager/internal/pages"
-	"github.com/ESELDevelopment/ecmanager/internal/pages/example"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages/example"
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/spinner"
 	tea "github.com/charmbracelet/bubbletea"
@@ -61,7 +61,7 @@ func (m page) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.spinner, cmd = m.spinner.Update(msg)
 		return m, cmd
 	case tea.WindowSizeMsg:
-		style = style.Width(msg.Width).Height(msg.Height)
+		style = style.Width(msg.Width)
 		return m, nil
 	default:
 		return m, nil

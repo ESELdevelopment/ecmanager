@@ -1,7 +1,7 @@
 package example_test
 
 import (
-	"github.com/ESELDevelopment/ecmanager/internal/pages/example"
+	"github.com/ESELDevelopment/ecmanager/internal/ui/pages/example"
 	"github.com/ESELDevelopment/ecmanager/testdata"
 	"github.com/charmbracelet/x/exp/teatest"
 	"github.com/stretchr/testify/assert"

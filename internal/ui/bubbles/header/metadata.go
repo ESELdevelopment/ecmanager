@@ -30,7 +30,8 @@ func (p metadata) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 
 func (p metadata) View() string {
-	return lipgloss.NewStyle().Border(lipgloss.NormalBorder(), true).BorderForeground(lipgloss.Color("123")).Width(p.width).MarginRight(1).Render(fmt.Sprintf(`Rev: %s
+	return lipgloss.NewStyle().Border(lipgloss.NormalBorder(), true).Width(p.width).MarginRight(1).
+		Render(fmt.Sprintf(`Rev: %s
 region: %s
 account: %s
 role: %s`, info.GetVersion(), p.region, p.arn, p.role))

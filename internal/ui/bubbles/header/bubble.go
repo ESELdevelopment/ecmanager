@@ -20,7 +20,9 @@ func New(currentRegion string) tea.Model {
 }
 
 func (p page) Init() tea.Cmd {
-	return nil
+	regionCmd := p.regions.Init()
+	metadataCmd := p.meta.Init()
+	return tea.Batch(regionCmd, metadataCmd)
 }
 
 func (p page) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
@@ -34,10 +36,6 @@ func (p page) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (p page) updateOnMessage(msg tea.Msg) (page, tea.Cmd) {
 	switch msg.(type) {
-	case tea.KeyMsg:
-		if msg.(tea.KeyMsg).String() == "q" {
-			return p, tea.Quit
-		}
 	case tea.WindowSizeMsg:
 		p.width = msg.(tea.WindowSizeMsg).Width
 		return p, nil
@@ -48,14 +46,13 @@ func (p page) updateOnMessage(msg tea.Msg) (page, tea.Cmd) {
 	default:
 		return p, nil
 	}
-	return p, nil
 }
 
 func (p page) View() string {
 	regionView := p.regions.View()
 	metaView := p.meta.View()
 	regionWith := lipgloss.Width(regionView)
-	metaSize := p.width - regionWith - 1
+	metaSize := p.width - regionWith
 	horizontal := lipgloss.JoinHorizontal(
 		lipgloss.Top,
 		lipgloss.NewStyle().Width(metaSize).Render(metaView),

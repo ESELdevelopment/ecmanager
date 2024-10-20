@@ -9,8 +9,15 @@ All custom makros are defined in the `main.py` file.
 
 ### Decision Plugin
 
-To document decisions, we defined a custom makro:
+To document decisions, we have defined a custom makro:
 
+```shell
+{% raw %}
+{{ decision("Insert Decision here") }}
+{% endraw %}
+```
+
+which will be rendered as:
 {{ decision("Insert Decision here") }}
 
 ## Notes

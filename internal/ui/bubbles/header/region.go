@@ -35,17 +35,17 @@ func createRegionChangedCmd(region string) tea.Cmd {
 var numbers = key.NewBinding(key.WithKeys("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"))
 
 func (p regions) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
-	switch msg.(type) {
+	switch msg := msg.(type) {
 	case tea.KeyMsg:
-		if key.Matches(msg.(tea.KeyMsg), numbers) {
-			index, _ := strconv.Atoi(msg.(tea.KeyMsg).String())
+		if key.Matches(msg, numbers) {
+			index, _ := strconv.Atoi(msg.String())
 			p.currentRegion = supportedRegions[index]
 			return p, createRegionChangedCmd(p.currentRegion)
 		}
 	case tea.WindowSizeMsg:
-		p.width = msg.(tea.WindowSizeMsg).Width / 3
+		p.width = msg.Width / 3
 	case RegionChanged:
-		p.currentRegion = msg.(RegionChanged).Value
+		p.currentRegion = msg.Value
 	}
 	return p, nil
 }

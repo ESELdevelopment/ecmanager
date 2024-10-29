@@ -10,7 +10,6 @@ import (
 type metadata struct {
 	arn    string
 	userId string
-	region string
 	width  int
 }
 
@@ -20,8 +19,6 @@ func (p metadata) Init() tea.Cmd {
 
 func (p metadata) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
-	case RegionChanged:
-		p.region = msg.Value
 	case tea.WindowSizeMsg:
 		p.width = msg.Width / 3
 	}
@@ -31,7 +28,6 @@ func (p metadata) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 func (p metadata) View() string {
 	return lipgloss.NewStyle().Border(lipgloss.NormalBorder(), true).Width(p.width).MarginRight(1).
 		Render(fmt.Sprintf(`Rev: %s
-region: %s
 arn: %s
-userId: %s`, info.GetVersion(), p.region, p.arn, p.userId))
+userId: %s`, info.GetVersion(), p.arn, p.userId))
 }

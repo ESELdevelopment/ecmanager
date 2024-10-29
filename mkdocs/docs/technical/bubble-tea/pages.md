@@ -33,11 +33,14 @@ func New() tea.Model {
 // Implement the tea.Model interface
 ```
 
-### Use Bubbles over custom components
+### Bubbles
 
 We want to use [bubbles](https://github.com/charmbracelet/bubbles)
 over custom components. This is to ensure a consistent look and feel of our
 application.
+
+If you need to create a custom bubble, simply create a new folder in the
+`internal/ui/bubbles` folder and add a `bubble.go` file.
 
 ### Use lipgloss for styling
 

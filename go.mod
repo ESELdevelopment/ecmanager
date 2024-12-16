@@ -5,7 +5,7 @@ go 1.22.6
 require (
 	github.com/aws/aws-sdk-go-v2 v1.32.6
 	github.com/aws/aws-sdk-go-v2/config v1.28.6
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.52.1
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.52.2
 	github.com/aws/smithy-go v1.22.1
 	github.com/charmbracelet/bubbles v0.20.0
 	github.com/charmbracelet/bubbletea v1.2.4
